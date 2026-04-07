@@ -313,8 +313,8 @@ export default function AgentPage() {
           <div className="w-16 h-16 mx-auto mb-4 bg-blue-500/10 rounded-full flex items-center justify-center">
             <Bot className="w-8 h-8 text-blue-400" />
           </div>
-          <h2 className="text-xl font-semibold text-white mb-2">Sign in to chat</h2>
-          <p className="text-slate-400 mb-6">Log in to your SPARK AI account to access the AI Assistant.</p>
+          <h2 className="text-xl font-semibold text-white mb-2">Forum Members Only</h2>
+          <p className="text-slate-400 mb-6">Upgrade to a Forum membership to chat with our AI research agent.</p>
           <a href="/auth" className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-full hover:from-blue-500 hover:to-indigo-500 transition-all shadow-lg shadow-blue-500/25">
             Sign In
           </a>
@@ -340,7 +340,7 @@ export default function AgentPage() {
       <div className="h-[calc(100vh-4rem)] bg-black flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-8 h-8 text-blue-400 animate-spin mx-auto mb-3" />
-          <p className="text-slate-400">Initializing SPARK AI Agent...</p>
+          <p className="text-slate-400">Initializing Research Agent...</p>
         </div>
       </div>
     );
@@ -416,8 +416,8 @@ export default function AgentPage() {
               <Sparkles className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="text-sm font-semibold text-white">SPARK AI Agent</h1>
-              <p className="text-xs text-slate-500">Ask anything about SPARK AI</p>
+              <h1 className="text-sm font-semibold text-white">Research Agent</h1>
+              <p className="text-xs text-slate-500">AI-powered research assistant</p>
             </div>
           </div>
         </div>
@@ -430,7 +430,7 @@ export default function AgentPage() {
                 <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500/20 to-indigo-600/20 rounded-2xl flex items-center justify-center border border-blue-500/10">
                   <Sparkles className="w-10 h-10 text-blue-400" />
                 </div>
-                <h2 className="text-2xl font-bold text-white mb-3">SPARK AI Agent</h2>
+                <h2 className="text-2xl font-bold text-white mb-3">Research Agent</h2>
                 <p className="text-slate-400 mb-8 leading-relaxed">
                   Ask me anything about SPARK AI Network, AI research, SDSC, or how AI is transforming your industry.
                 </p>
@@ -490,7 +490,7 @@ export default function AgentPage() {
                 value={input}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
-                placeholder="Ask SPARK AI Agent..."
+                placeholder="Ask Research Agent..."
                 rows={1}
                 disabled={loading}
                 className="flex-1 bg-transparent text-white placeholder-slate-500 px-4 py-3.5 resize-none outline-none text-sm max-h-[200px] disabled:opacity-50"
