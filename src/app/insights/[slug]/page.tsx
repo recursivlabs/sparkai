@@ -230,13 +230,13 @@ export default function PaperDetailPage() {
                 {!user ? (
                   <>
                     <Link
-                      href="/auth/register"
+                      href="/auth"
                       className="inline-flex items-center h-10 px-6 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
                     >
                       Join SPARK AI
                     </Link>
                     <Link
-                      href="/auth/login"
+                      href="/auth"
                       className="inline-flex items-center h-10 px-6 border border-slate-700 text-slate-300 text-sm font-medium rounded-lg hover:border-slate-500 transition-colors"
                     >
                       Sign In

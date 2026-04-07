@@ -125,7 +125,7 @@ export default function RsvpButton({
     const returnUrl = `/events?rsvp=${encodeURIComponent(eventId)}`;
     return (
       <Link
-        href={`/auth/register?returnTo=${encodeURIComponent(returnUrl)}`}
+        href={`/auth?returnTo=${encodeURIComponent(returnUrl)}`}
         className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
       >
         <CalendarCheck className="w-4 h-4" />

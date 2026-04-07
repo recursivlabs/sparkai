@@ -49,7 +49,7 @@ export default function TierGate({
         </p>
         {!currentTier ? (
           <Link
-            href="/auth/register"
+            href="/auth"
             className="px-4 py-2 bg-accent-blue text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors"
           >
             Join SPARK AI

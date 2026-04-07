@@ -194,7 +194,7 @@ export default function EventsPage() {
             Get event notifications and community news in your inbox.
           </p>
           <Link
-            href="/auth/register"
+            href="/auth"
             className="inline-flex items-center h-10 px-8 bg-blue-600 text-white text-sm font-medium rounded-full hover:bg-blue-700 transition-colors"
           >
             Join SPARK AI

@@ -84,13 +84,13 @@ function DashboardContent() {
           <p className="text-slate-400 text-sm mb-6">Sign in to access your dashboard.</p>
           <div className="flex items-center justify-center gap-3">
             <Link
-              href="/auth/login"
+              href="/auth"
               className="h-10 px-6 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors flex items-center"
             >
               Sign In
             </Link>
             <Link
-              href="/auth/register"
+              href="/auth"
               className="h-10 px-6 border border-slate-700 text-slate-300 text-sm font-medium rounded-lg hover:border-slate-500 transition-colors flex items-center"
             >
               Create Account

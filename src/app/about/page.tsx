@@ -86,7 +86,7 @@ export default function AboutPage() {
             Join SPARK AI to collaborate on research, attend events, and connect with AI leaders.
           </p>
           <Link
-            href="/auth/register"
+            href="/auth"
             className="inline-flex items-center h-10 px-8 bg-blue-600 text-white text-sm font-medium rounded-full hover:bg-blue-700 transition-colors"
           >
             Join SPARK AI

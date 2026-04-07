@@ -158,7 +158,7 @@ export default function ResearchPage() {
                 <div className="flex items-center gap-2 flex-shrink-0">
                   {project.access === "forum" ? (
                     <Link
-                      href="/auth/register"
+                      href="/auth"
                       className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 transition-colors"
                     >
                       <Lock className="w-3 h-3" />
@@ -232,7 +232,7 @@ export default function ResearchPage() {
             Partner on research or access our full publication library by joining the consortium.
           </p>
           <Link
-            href="/auth/register"
+            href="/auth"
             className="inline-flex items-center h-11 px-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-medium rounded-full hover:from-blue-500 hover:to-indigo-500 transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
           >
             Join SPARK AI

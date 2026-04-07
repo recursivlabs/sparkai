@@ -28,7 +28,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/auth/login"
+                  href="/auth"
                   className="text-sm text-slate-400 hover:text-white transition-colors"
                 >
                   Join Discussion

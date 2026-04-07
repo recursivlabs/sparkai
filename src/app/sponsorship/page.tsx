@@ -257,7 +257,7 @@ export default function SponsorshipPage() {
                 Contact James Short
               </a>
               <Link
-                href="/auth/register"
+                href="/auth"
                 className="inline-flex items-center h-11 px-8 border border-slate-600 text-white text-sm font-medium rounded-full hover:border-slate-400 transition-colors"
               >
                 Join SPARK AI Free

@@ -94,7 +94,7 @@ export default function HomePage() {
             </p>
             <div className="pt-4">
               <Link
-                href="/auth/register"
+                href="/auth"
                 className="inline-flex items-center h-11 px-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-medium rounded-full hover:from-blue-500 hover:to-indigo-500 transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
               >
                 Join SPARK AI
@@ -178,7 +178,7 @@ export default function HomePage() {
             amplifying their impact on how we live, work and connect with the world.
           </p>
           <Link
-            href="/auth/register"
+            href="/auth"
             className="inline-flex items-center h-11 px-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-medium rounded-full hover:from-blue-500 hover:to-indigo-500 transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
           >
             Join SPARK AI

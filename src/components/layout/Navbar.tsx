@@ -98,13 +98,13 @@ export default function Navbar() {
             ) : (
               <>
                 <Link
-                  href="/auth/login"
+                  href="/auth"
                   className="hidden sm:inline-flex items-center px-4 py-2 text-slate-400 text-sm font-medium hover:text-white transition-colors"
                 >
                   Sign In
                 </Link>
                 <Link
-                  href="/auth/register"
+                  href="/auth"
                   className="hidden sm:inline-flex items-center h-10 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-medium rounded-full hover:from-blue-500 hover:to-indigo-500 transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
                 >
                   Join SPARK AI
@@ -164,13 +164,13 @@ export default function Navbar() {
               ) : (
                 <>
                   <Link
-                    href="/auth/register"
+                    href="/auth"
                     className="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-medium rounded-lg shadow-lg shadow-blue-500/25"
                   >
                     Join SPARK AI
                   </Link>
                   <Link
-                    href="/auth/login"
+                    href="/auth"
                     className="inline-flex items-center justify-center px-4 py-2 text-muted text-sm font-medium rounded-lg border border-border"
                   >
                     Sign In

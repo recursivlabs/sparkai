@@ -315,7 +315,7 @@ export default function AgentPage() {
           </div>
           <h2 className="text-xl font-semibold text-white mb-2">Sign in to chat</h2>
           <p className="text-slate-400 mb-6">Log in to your SPARK AI account to access the AI Assistant.</p>
-          <a href="/auth/login" className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-full hover:from-blue-500 hover:to-indigo-500 transition-all shadow-lg shadow-blue-500/25">
+          <a href="/auth" className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-full hover:from-blue-500 hover:to-indigo-500 transition-all shadow-lg shadow-blue-500/25">
             Sign In
           </a>
         </div>
