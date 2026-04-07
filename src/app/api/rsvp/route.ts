@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     // Send RSVP confirmation — don't fail the RSVP if email fails
     let emailSent = false;
     try {
-      await sendRsvpConfirmation({ email, name, eventTitle, eventDate, eventTime });
+      await sendRsvpConfirmation({ email, name, eventTitle, eventDate, eventTime, isoDate, meetingLink });
       emailSent = true;
     } catch (emailErr) {
       console.error("RSVP email failed for", email, "—", emailErr);
