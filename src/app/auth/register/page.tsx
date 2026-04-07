@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
-import { Check } from "lucide-react";
+import { Check, Loader2, ArrowRight } from "lucide-react";
 
 export default function RegisterPage() {
   return (
@@ -18,37 +18,56 @@ function RegisterContent() {
   const searchParams = useSearchParams();
   const returnTo = searchParams.get("returnTo");
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    organization: "",
-    role: "",
-    password: "",
-  });
+  const [step, setStep] = useState<"email" | "code">("email");
+  const [email, setEmail] = useState("");
+  const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSendCode(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setError("");
 
     try {
-      const res = await fetch("/api/auth/register", {
+      const res = await fetch("/api/auth/otp/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ email }),
       });
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || "Registration failed");
+        throw new Error(data.error || "Failed to send code");
       }
 
-      // Redirect — session cookie is set
+      setStep("code");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleVerifyCode(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/auth/otp/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, otp: code }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Invalid code");
+      }
+
       window.location.href = returnTo || "/member/dashboard";
-      return;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
@@ -86,104 +105,89 @@ function RegisterContent() {
       <div className="min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-sm w-full">
           <div className="text-center mb-6">
-            <h1 className="text-xl font-bold text-white mb-1">Create your account</h1>
-            <p className="text-slate-400 text-xs">Free Community membership</p>
+            <h1 className="text-xl font-bold text-white mb-1">
+              {step === "email" ? "Join SPARK AI" : "Check your email"}
+            </h1>
+            <p className="text-slate-400 text-xs">
+              {step === "email"
+                ? "Enter your email — no password needed"
+                : `We sent a 6-digit code to ${email}`}
+            </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-3">
-            <div>
-              <label htmlFor="name" className="block text-xs font-medium text-slate-400 mb-1">
-                Full Name
-              </label>
+          {step === "email" ? (
+            <form onSubmit={handleSendCode} className="space-y-3">
               <input
-                id="name"
-                type="text"
-                required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className={inputClass}
-                placeholder="Jane Smith"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-xs font-medium text-slate-400 mb-1">
-                Email
-              </label>
-              <input
-                id="email"
                 type="email"
                 required
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                autoFocus
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className={inputClass}
-                placeholder="jane@company.com"
+                placeholder="you@company.com"
               />
-            </div>
 
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <label htmlFor="organization" className="block text-xs font-medium text-slate-400 mb-1">
-                  Organization
-                </label>
-                <input
-                  id="organization"
-                  type="text"
-                  value={form.organization}
-                  onChange={(e) => setForm({ ...form, organization: e.target.value })}
-                  className={inputClass}
-                  placeholder="Acme Corp"
-                />
-              </div>
-              <div>
-                <label htmlFor="role" className="block text-xs font-medium text-slate-400 mb-1">
-                  Title
-                </label>
-                <input
-                  id="role"
-                  type="text"
-                  value={form.role}
-                  onChange={(e) => setForm({ ...form, role: e.target.value })}
-                  className={inputClass}
-                  placeholder="VP Engineering"
-                />
-              </div>
-            </div>
+              {error && (
+                <div className="p-2 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-xs">
+                  {error}
+                </div>
+              )}
 
-            <div>
-              <label htmlFor="password" className="block text-xs font-medium text-slate-400 mb-1">
-                Password
-              </label>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full h-9 flex items-center justify-center gap-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+              >
+                {loading ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <>Send Code <ArrowRight className="w-3.5 h-3.5" /></>
+                )}
+              </button>
+            </form>
+          ) : (
+            <form onSubmit={handleVerifyCode} className="space-y-3">
               <input
-                id="password"
-                type="password"
+                type="text"
                 required
-                minLength={12}
-                value={form.password}
-                onChange={(e) => setForm({ ...form, password: e.target.value })}
-                className={inputClass}
-                placeholder="Min. 12 chars, upper + lower + number + symbol"
+                autoFocus
+                maxLength={6}
+                pattern="[0-9]{6}"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                value={code}
+                onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
+                className={`${inputClass} text-center text-2xl tracking-[0.5em] font-mono`}
+                placeholder="000000"
               />
-            </div>
 
-            {error && (
-              <div className="p-2 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-xs">
-                {error}
-              </div>
-            )}
+              {error && (
+                <div className="p-2 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-xs">
+                  {error}
+                </div>
+              )}
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full h-9 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-            >
-              {loading ? "Creating..." : "Sign Up Free"}
-            </button>
-          </form>
+              <button
+                type="submit"
+                disabled={loading || code.length !== 6}
+                className="w-full h-9 flex items-center justify-center gap-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+              >
+                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Verify & Join"}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => { setStep("email"); setCode(""); setError(""); }}
+                className="w-full text-xs text-slate-500 hover:text-slate-300 transition-colors"
+              >
+                Use a different email
+              </button>
+            </form>
+          )}
 
           <div className="flex items-center justify-between mt-4">
             <button
-              onClick={() => setShowForm(false)}
+              onClick={() => { setShowForm(false); setStep("email"); setCode(""); setError(""); }}
               className="text-xs text-slate-500 hover:text-slate-300 transition-colors"
             >
               &larr; Back to tiers
