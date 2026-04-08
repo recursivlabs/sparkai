@@ -4,7 +4,7 @@ export async function sendWelcomeEmail(email: string, name: string) {
   return getRecursiv().email.send({
     to: email,
     subject: "Welcome to SPARK AI Network",
-    from: "SPARK AI <welcome@sparkai.network>",
+    from: "SPARK AI <welcome@recursiv.io>",
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #000; color: #fff; padding: 40px;">
         <h1 style="color: #3b82f6;">Welcome to SPARK AI, ${name}!</h1>
@@ -43,7 +43,7 @@ export async function sendEventReminder({
   return getRecursiv().email.send({
     to: email,
     subject: `Reminder: ${eventTitle} is tomorrow`,
-    from: "SPARK AI <events@sparkai.network>",
+    from: "SPARK AI Events <events@recursiv.io>",
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #000; color: #fff; padding: 40px;">
         <div style="text-align: center; margin-bottom: 32px;">
@@ -130,7 +130,7 @@ export async function sendRsvpConfirmation({
   return getRecursiv().email.send({
     to: email,
     subject: `RSVP Confirmed: ${eventTitle}`,
-    from: "SPARK AI <events@sparkai.network>",
+    from: "SPARK AI Events <events@recursiv.io>",
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #000; color: #fff; padding: 40px;">
         <div style="text-align: center; margin-bottom: 32px;">
