@@ -110,6 +110,11 @@ export function getUpcomingEvents(): SparkEvent[] {
 
 const SITE_URL = "https://sparkai.on.recursiv.io";
 
+/** Replace raw em dashes with HTML entity for email compatibility */
+function emailSafe(str: string): string {
+  return str.replace(/—/g, "&mdash;").replace(/–/g, "&ndash;");
+}
+
 /**
  * Build the monthly digest email HTML.
  */
@@ -120,9 +125,9 @@ export function buildDigestHtml(events: SparkEvent[], monthLabel: string): strin
       <div style="background: #111; border-radius: 8px; padding: 20px; margin-bottom: 12px; border-left: 3px solid #3b82f6;">
         <div style="display: flex; justify-content: space-between; align-items: flex-start;">
           <div>
-            <p style="color: #3b82f6; font-size: 11px; margin: 0 0 4px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">${evt.type} &middot; ${evt.date}</p>
-            <h3 style="color: #fff; margin: 0 0 6px 0; font-size: 16px; font-weight: 600;">${evt.title}</h3>
-            <p style="color: #a1a1aa; margin: 0; font-size: 13px;">${evt.location}</p>
+            <p style="color: #3b82f6; font-size: 11px; margin: 0 0 4px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">${emailSafe(evt.type)} &middot; ${emailSafe(evt.date)}</p>
+            <h3 style="color: #fff; margin: 0 0 6px 0; font-size: 16px; font-weight: 600;">${emailSafe(evt.title)}</h3>
+            <p style="color: #a1a1aa; margin: 0; font-size: 13px;">${emailSafe(evt.location)}</p>
           </div>
         </div>
         <div style="margin-top: 12px;">
@@ -141,7 +146,7 @@ export function buildDigestHtml(events: SparkEvent[], monthLabel: string): strin
       </div>
       <div style="margin-bottom: 24px;">
         <h2 style="color: #fff; font-size: 20px; margin: 0 0 4px 0;">What's Coming Up</h2>
-        <p style="color: #a1a1aa; font-size: 14px; margin: 0;">${monthLabel} — SPARK AI Network Events</p>
+        <p style="color: #a1a1aa; font-size: 14px; margin: 0;">${monthLabel} &mdash; SPARK AI Network Events</p>
       </div>
       ${eventRows}
       ${events.length === 0 ? `<p style="color: #a1a1aa; font-size: 14px;">No events scheduled for ${monthLabel} yet. Stay tuned!</p>` : ""}

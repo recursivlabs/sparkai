@@ -66,6 +66,10 @@ export async function POST(req: NextRequest) {
   }
 }
 
+function emailSafe(str: string): string {
+  return str.replace(/—/g, "&mdash;").replace(/–/g, "&ndash;");
+}
+
 function buildWelcomeDigestHtml(events: { id: string; date: string; title: string; location: string; type: string; url?: string }[], monthLabel: string): string {
   const siteUrl = "https://sparkai.on.recursiv.io";
 
@@ -73,9 +77,9 @@ function buildWelcomeDigestHtml(events: { id: string; date: string; title: strin
     const rsvpUrl = `${siteUrl}/events?rsvp=${encodeURIComponent(evt.id)}`;
     return `
       <div style="background: #111; border-radius: 8px; padding: 20px; margin-bottom: 12px; border-left: 3px solid #3b82f6;">
-        <p style="color: #3b82f6; font-size: 11px; margin: 0 0 4px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">${evt.type} &middot; ${evt.date}</p>
-        <h3 style="color: #fff; margin: 0 0 6px 0; font-size: 16px; font-weight: 600;">${evt.title}</h3>
-        <p style="color: #a1a1aa; margin: 0 0 12px 0; font-size: 13px;">${evt.location}</p>
+        <p style="color: #3b82f6; font-size: 11px; margin: 0 0 4px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">${emailSafe(evt.type)} &middot; ${emailSafe(evt.date)}</p>
+        <h3 style="color: #fff; margin: 0 0 6px 0; font-size: 16px; font-weight: 600;">${emailSafe(evt.title)}</h3>
+        <p style="color: #a1a1aa; margin: 0 0 12px 0; font-size: 13px;">${emailSafe(evt.location)}</p>
         <a href="${rsvpUrl}" style="display: inline-block; padding: 8px 20px; background: #3b82f6; color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 13px;">RSVP</a>
       </div>`;
   }).join("");
