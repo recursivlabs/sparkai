@@ -66,7 +66,7 @@ function buildWelcomeDigestHtml(events: { id: string; date: string; title: strin
   const siteUrl = "https://sparkai.on.recursiv.io";
 
   const eventRows = events.map((evt) => {
-    const rsvpUrl = `${siteUrl}/events?rsvp=${encodeURIComponent(evt.id)}`;
+    const rsvpUrl = `${siteUrl}/auth?returnTo=${encodeURIComponent(`/events?rsvp=${evt.id}`)}`;
     return `
       <div style="background: #111; border-radius: 8px; padding: 20px; margin-bottom: 12px; border-left: 3px solid #3b82f6;">
         <p style="color: #3b82f6; font-size: 11px; margin: 0 0 4px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">${emailSafe(evt.type)} &middot; ${emailSafe(evt.date)}</p>

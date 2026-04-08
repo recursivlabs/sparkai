@@ -120,7 +120,8 @@ function emailSafe(str: string): string {
  */
 export function buildDigestHtml(events: SparkEvent[], monthLabel: string): string {
   const eventRows = events.map((evt) => {
-    const rsvpUrl = `${SITE_URL}/events?rsvp=${encodeURIComponent(evt.id)}`;
+    const eventsUrl = `${SITE_URL}/events?rsvp=${encodeURIComponent(evt.id)}`;
+    const rsvpUrl = `${SITE_URL}/auth?returnTo=${encodeURIComponent(`/events?rsvp=${evt.id}`)}`;
     return `
       <div style="background: #111; border-radius: 8px; padding: 20px; margin-bottom: 12px; border-left: 3px solid #3b82f6;">
         <div style="display: flex; justify-content: space-between; align-items: flex-start;">

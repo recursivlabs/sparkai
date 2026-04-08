@@ -1,7 +1,6 @@
 import { cookies } from "next/headers";
+import { getRecursiv } from "./recursiv";
 import type { MembershipTier } from "./tiers";
-
-const API_ORIGIN = (process.env.NEXT_PUBLIC_RECURSIV_URL || "https://api.recursiv.io/api/v1").replace(/\/api\/v1$/, "");
 
 export interface SessionUser {
   id: string;
@@ -20,32 +19,20 @@ export async function getSessionUser(): Promise<SessionUser | null> {
   if (!token) return null;
 
   try {
-    const res = await fetch(`${API_ORIGIN}/api/auth/get-session`, {
-      headers: {
-        "Origin": API_ORIGIN,
-        "Cookie": `__Secure-better-auth.session_token=${encodeURIComponent(token)}; better-auth.session_token=${encodeURIComponent(token)}`,
-      },
-      cache: "no-store",
-    });
+    const r = getRecursiv();
+    const session = await r.auth.getSession(token);
 
-    if (!res.ok) return null;
+    if (!session?.user?.id) return null;
 
-    const text = await res.text();
-    if (!text || text === "null") return null;
-
-    const data = JSON.parse(text);
-    const user = data.user || data.session?.user;
-    if (!user?.id) return null;
-
-    const role = user.role || "community";
+    const role = session.user.role || "community";
     let tier: MembershipTier = "community";
     if (role === "arc" || role === "admin") tier = "arc";
     else if (role === "forum") tier = "forum";
 
     return {
-      id: user.id,
-      name: user.name || "",
-      email: user.email || "",
+      id: session.user.id,
+      name: session.user.name || "",
+      email: session.user.email || "",
       tier,
     };
   } catch {

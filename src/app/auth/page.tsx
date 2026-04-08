@@ -16,7 +16,8 @@ export default function AuthPage() {
 function AuthContent() {
   const searchParams = useSearchParams();
   const returnTo = searchParams.get("returnTo");
-  const [step, setStep] = useState<"tiers" | "email" | "code">("tiers");
+  // Skip tiers and go straight to email input when redirected from RSVP or other flow
+  const [step, setStep] = useState<"tiers" | "email" | "code">(returnTo ? "email" : "tiers");
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
@@ -85,11 +86,13 @@ function AuthContent() {
               <Mail className="w-6 h-6 text-blue-400" />
             </div>
             <h1 className="text-xl font-bold text-white mb-1">
-              {step === "email" ? "Sign in to SPARK AI" : "Check your email"}
+              {step === "email"
+                ? returnTo?.includes("rsvp") ? "Sign in to RSVP" : "Sign in to SPARK AI"
+                : "Check your email"}
             </h1>
             <p className="text-slate-400 text-xs">
               {step === "email"
-                ? "Enter your email — no password needed. New here? We'll create your account."
+                ? "Enter your email — no password needed. New or returning, just enter your email."
                 : `We sent a 6-digit code to ${email}`}
             </p>
           </div>
