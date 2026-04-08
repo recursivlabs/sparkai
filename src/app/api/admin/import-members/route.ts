@@ -92,9 +92,12 @@ function buildWelcomeDigestHtml(events: { id: string; date: string; title: strin
         </h1>
       </div>
       <div style="margin-bottom: 24px;">
-        <h2 style="color: #fff; font-size: 22px; margin: 0 0 8px 0;">Welcome to the SPARK AI Network</h2>
+        <h2 style="color: #fff; font-size: 22px; margin: 0 0 8px 0;">SPARK AI Has a New Home</h2>
+        <p style="color: #a1a1aa; font-size: 14px; line-height: 1.6; margin: 0 0 12px 0;">
+          We've upgraded the SPARK AI Network website. You can now browse events, RSVP with one click, and get calendar invites delivered straight to your inbox.
+        </p>
         <p style="color: #a1a1aa; font-size: 14px; line-height: 1.6; margin: 0;">
-          You're now part of a community of researchers, executives, and practitioners exploring how AI transforms business, government, and society. Based at the San Diego Supercomputer Center, SPARK AI brings together the people and ideas shaping the future of AI.
+          You'll receive a monthly update with upcoming events and community news. You can unsubscribe anytime using the link at the bottom of any email.
         </p>
       </div>
       <div style="margin-bottom: 24px;">
