@@ -18,7 +18,7 @@ const UPCOMING = [
     location: "Virtual — 2:00 PM CDT",
     time: "2:00 PM CDT",
     type: "Roundtable",
-    meetingLink: "https://meet.google.com/spark-ai-massa",
+    meetingLink: undefined, // TODO — Jim to provide Zoom link
   },
   {
     id: "evt-reuters-apr-2026",
@@ -37,7 +37,7 @@ const UPCOMING = [
     location: "Virtual — 2:00 PM CDT",
     time: "2:00 PM CDT",
     type: "Roundtable",
-    meetingLink: "https://meet.google.com/spark-ai-williams",
+    meetingLink: undefined, // TODO — Jim to provide Zoom link
   },
   {
     id: "evt-dataversity-may-2026",
