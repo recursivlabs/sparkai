@@ -3,81 +3,15 @@ import PageHero from "@/components/ui/PageHero";
 import RsvpButton from "@/components/ui/RsvpButton";
 import { Calendar, MapPin, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import { UPCOMING_EVENTS, PAST_EVENTS } from "@/lib/events";
 
 export const metadata = {
   title: "Events — SPARK AI Network",
   description: "Conferences, workshops, roundtables, and community gatherings from SPARK AI.",
 };
 
-const UPCOMING = [
-  {
-    id: "rt-massa-apr-2026",
-    date: "Apr 10",
-    isoDate: "2026-04-10",
-    title: "SPARK Community Roundtable — James Massa, JP Morgan Chase",
-    location: "Virtual — 2:00 PM CDT",
-    time: "2:00 PM CDT",
-    type: "Roundtable",
-    meetingLink: undefined, // TODO — Jim to provide Zoom link
-  },
-  {
-    id: "evt-reuters-apr-2026",
-    date: "Apr 21–22",
-    isoDate: "2026-04-21",
-    title: "Reuters Customer Service & Experience West 2026",
-    location: "San Diego, CA",
-    type: "Conference",
-    url: "https://events.reutersevents.com/customer-service/cswest",
-  },
-  {
-    id: "rt-williams-apr-2026",
-    date: "Apr 24",
-    isoDate: "2026-04-24",
-    title: "SPARK Community Roundtable — Spencer Williams, CWSL",
-    location: "Virtual — 2:00 PM CDT",
-    time: "2:00 PM CDT",
-    type: "Roundtable",
-    meetingLink: undefined, // TODO — Jim to provide Zoom link
-  },
-  {
-    id: "evt-dataversity-may-2026",
-    date: "May 4–8",
-    isoDate: "2026-05-04",
-    title: "Dataversity DGIQ + Enterprise Data World",
-    location: "San Diego, CA",
-    type: "Conference",
-    url: "https://dataversity.net/dgiq-edw-west/",
-  },
-  {
-    id: "evt-minds-sponsor-2026",
-    date: "May TBD",
-    title: "Minds.com Sponsor Presentation",
-    location: "Virtual",
-    type: "Presentation",
-  },
-  {
-    id: "evt-sd-digital-gov-2026",
-    date: "June 9",
-    isoDate: "2026-06-09",
-    title: "San Diego Digital Government Summit 2026",
-    location: "San Diego, CA",
-    type: "Summit",
-    url: "https://events.govtech.com/san-diego-digital-government-summit.html",
-  },
-];
-
-const PAST = [
-  { title: "SPARK Community Roundtable", date: "Mar 13, 2026", location: "Virtual — 12:00 PM PT" },
-  { title: "SPARK Advisory Board & ARC Quarterly Meetings", date: "Mar 2026", location: "Virtual (invitation only)" },
-  { title: "Micro Gains, Macro Patience: Early Evidence on Agentic AI Productivity", date: "Feb 12, 2026", location: "MIT Harvard DC Alumni Club (virtual)" },
-  { title: "Artificial Intelligence: The Race for Regulation", date: "Jan 22–23, 2026", location: "California Western School of Law, San Diego" },
-  { title: "GovAI Coalition Summit", date: "Nov 2025", location: "San Jose, CA", url: "https://events.govtech.com/GovAI-Coalition-Summit.html" },
-  { title: "Solix Empower Annual Symposium", date: "Oct 2025", location: "San Diego, CA", url: "https://empower.solix.com/" },
-  { title: "San Diego Startup Week", date: "Oct 2025", location: "San Diego, CA", url: "https://www.sandiegostartupweek.com/" },
-  { title: "CDOIQ 2025", date: "Jul 2025", location: "Boston, MA", url: "https://cdoiqsymposium.com/" },
-  { title: "CDOIQ/Solix Mini-Symposium", date: "Jul 2025", location: "Boston, MA", url: "https://cdoiqsymposium.com/" },
-  { title: "SD Digital Government Summit", date: "2024", location: "San Diego, CA" },
-];
+const UPCOMING = UPCOMING_EVENTS;
+const PAST = PAST_EVENTS;
 
 const TYPE_COLORS: Record<string, string> = {
   Conference: "text-blue-400",
