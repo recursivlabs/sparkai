@@ -144,8 +144,7 @@ export async function sendRsvpConfirmation({
           ${eventDate ? `<p style="color: #3b82f6; margin: 0; font-size: 14px;">${eventDate}${eventTime ? ` &middot; ${eventTime}` : ""}</p>` : ""}
         </div>
         <p style="color: #a1a1aa; font-size: 14px; line-height: 1.6;">
-          ${name ? `Hi ${name}, t` : "T"}hanks for registering! You'll receive a reminder
-          email with the join link before the event starts.
+          ${name ? `Hi ${name}, t` : "T"}hanks for registering! Add this event to your calendar so you don't miss it.
         </p>
         ${meetingLink ? `
         <div style="margin: 16px 0; text-align: center;">
