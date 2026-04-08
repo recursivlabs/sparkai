@@ -12,7 +12,7 @@ export function getRecursiv(): Recursiv {
   return _recursiv;
 }
 
-/** Anonymous SDK instance for auth operations */
+/** Anonymous SDK instance for auth operations (no API key needed) */
 export const anonSdk = new Recursiv({
   baseUrl: process.env.NEXT_PUBLIC_RECURSIV_URL || "https://api.recursiv.io/api/v1",
   anonymous: true,

@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@recursiv/sdk':
-        specifier: ^0.3.0
-        version: 0.3.0(react@19.2.4)
+        specifier: ^0.3.1
+        version: 0.3.1(react@19.2.4)
       lucide-react:
         specifier: ^0.577.0
         version: 0.577.0(react@19.2.4)
@@ -411,8 +411,8 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
-  '@recursiv/sdk@0.3.0':
-    resolution: {integrity: sha512-qQm6j4NuMnNGomsf0GnAeR+cLsFnGHlhlwjjN0MFwFzw1ZusriLyv4+ouKHBrN5wTVVR/TBYEI7mzH0u4gLWOA==}
+  '@recursiv/sdk@0.3.1':
+    resolution: {integrity: sha512-7/258QqVr00nC8oSN0qE6PVK+U+Qwfy1u6WF0JCUWJfR+zUGaBxqS+pU6Xmpjg8Te052wMEmlKZVkWfxM/UuyQ==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^18.3.1 || ^19.0.0
@@ -2314,7 +2314,7 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@recursiv/sdk@0.3.0(react@19.2.4)':
+  '@recursiv/sdk@0.3.1(react@19.2.4)':
     dependencies:
       react: 19.2.4
       socket.io-client: 4.8.3

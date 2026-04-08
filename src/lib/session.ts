@@ -24,7 +24,7 @@ export async function getSessionUser(): Promise<SessionUser | null> {
 
     if (!session?.user?.id) return null;
 
-    const role = session.user.role || "community";
+    const role = (session.user as Record<string, unknown>).role as string || "community";
     let tier: MembershipTier = "community";
     if (role === "arc" || role === "admin") tier = "arc";
     else if (role === "forum") tier = "forum";

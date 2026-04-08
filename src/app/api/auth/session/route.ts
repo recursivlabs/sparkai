@@ -18,7 +18,7 @@ export async function GET() {
       return NextResponse.json({ user: null, reason: "invalid_session" }, { status: 401 });
     }
 
-    const role = session.user.role || "community";
+    const role = (session.user as Record<string, unknown>).role as string || "community";
     let tier = "community";
     if (role === "arc" || role === "admin") tier = "arc";
     else if (role === "forum") tier = "forum";
