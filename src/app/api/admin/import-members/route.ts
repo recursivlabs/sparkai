@@ -1,12 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getRecursiv } from "@/lib/recursiv";
-import { getUpcomingEvents, buildDigestHtml, buildDigestText } from "@/lib/events";
+import { getUpcomingEvents } from "@/lib/events";
 
 // POST /api/admin/import-members
 // Body: { emails: string[] }
-// Imports members and sends them a welcome digest with upcoming events.
-// Uses the Recursiv campaign system — creates a "Welcome" campaign, imports
-// the emails as recipients, and starts sending.
+// Sends each member a welcome digest with upcoming events via transactional email.
 export async function POST(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
@@ -26,44 +24,38 @@ export async function POST(req: NextRequest) {
   const now = new Date();
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const monthLabel = `${monthNames[now.getMonth()]} ${now.getFullYear()}`;
+  const html = buildWelcomeDigestHtml(events, monthLabel);
 
-  try {
-    // Create a welcome campaign
-    const { data: campaign } = await r.email.createCampaign({
-      name: `Welcome to SPARK AI — ${monthLabel}`,
-      subject: `Welcome to SPARK AI Network — Here's What's Coming Up`,
-      from_email: "events@recursiv.io", // TODO: switch to events@sparkai.network once verified
-      from_name: "SPARK AI Network",
-      html_content: buildWelcomeDigestHtml(events, monthLabel),
-      text_content: buildDigestText(events, monthLabel),
-    });
+  let sent = 0;
+  let errors = 0;
+  const failed: string[] = [];
 
-    // Import all emails as recipients
-    const { data: imported } = await r.email.importRecipients(campaign.id, {
-      emails: emails.map((e: string) => e.trim().toLowerCase()),
-    });
+  for (const email of emails) {
+    const to = email.trim().toLowerCase();
+    if (!to) continue;
 
-    // Start sending
-    await r.email.startCampaign(campaign.id);
-
-    return NextResponse.json({
-      success: true,
-      campaign_id: campaign.id,
-      recipients: {
-        total: emails.length,
-        imported: imported.imported,
-        suppressed: imported.suppressed,
-        duplicates: imported.duplicates,
-      },
-      events_included: events.length,
-      status: "sending",
-    });
-  } catch (err) {
-    console.error("Import members failed:", err);
-    return NextResponse.json({
-      error: err instanceof Error ? err.message : "Import failed",
-    }, { status: 500 });
+    try {
+      await r.email.send({
+        to,
+        subject: `Welcome to SPARK AI Network &mdash; Here's What's Coming Up`,
+        from: "SPARK AI Network <events@recursiv.io>",
+        html,
+      });
+      sent++;
+    } catch (err) {
+      console.error(`Welcome email failed for ${to}:`, err);
+      errors++;
+      failed.push(to);
+    }
   }
+
+  return NextResponse.json({
+    success: true,
+    sent,
+    errors,
+    failed: failed.length > 0 ? failed : undefined,
+    events_included: events.length,
+  });
 }
 
 function emailSafe(str: string): string {
