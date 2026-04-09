@@ -98,7 +98,7 @@ export default function Navbar() {
             ) : (
               <>
                 <Link
-                  href="/auth"
+                  href="/auth?returnTo=/member/dashboard"
                   className="hidden sm:inline-flex items-center px-4 py-2 text-slate-400 text-sm font-medium hover:text-white transition-colors"
                 >
                   Sign In
@@ -170,7 +170,7 @@ export default function Navbar() {
                     Join SPARK AI
                   </Link>
                   <Link
-                    href="/auth"
+                    href="/auth?returnTo=/member/dashboard"
                     className="inline-flex items-center justify-center px-4 py-2 text-muted text-sm font-medium rounded-lg border border-border"
                   >
                     Sign In
