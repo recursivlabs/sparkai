@@ -9,9 +9,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Email and code are required" }, { status: 400 });
     }
 
+    console.log(`OTP verify attempt for ${email}`);
     const session = await anonSdk.auth.verifyOtp({ email, otp });
+    console.log(`OTP verify result: token=${session.token ? 'YES' : 'NO'}, user=${session.user?.email || 'none'}`);
 
     if (!session.token) {
+      console.error('OTP verify succeeded but no token returned');
       return NextResponse.json({ error: "Verification succeeded but no session token received" }, { status: 500 });
     }
 
