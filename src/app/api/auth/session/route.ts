@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { getRecursiv } from "@/lib/recursiv";
+import { anonSdk } from "@/lib/recursiv";
 
 export async function GET() {
   const cookieStore = await cookies();
@@ -11,8 +11,7 @@ export async function GET() {
   }
 
   try {
-    const r = getRecursiv();
-    const session = await r.auth.getSession(token);
+    const session = await anonSdk.auth.getSession(token);
 
     if (!session?.user?.id) {
       return NextResponse.json({ user: null, reason: "invalid_session" }, { status: 401 });

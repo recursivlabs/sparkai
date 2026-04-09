@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { getRecursiv } from "./recursiv";
+import { anonSdk } from "./recursiv";
 import type { MembershipTier } from "./tiers";
 
 export interface SessionUser {
@@ -19,8 +19,7 @@ export async function getSessionUser(): Promise<SessionUser | null> {
   if (!token) return null;
 
   try {
-    const r = getRecursiv();
-    const session = await r.auth.getSession(token);
+    const session = await anonSdk.auth.getSession(token);
 
     if (!session?.user?.id) return null;
 
