@@ -313,8 +313,8 @@ export default function AgentPage() {
           <div className="w-16 h-16 mx-auto mb-4 bg-blue-500/10 rounded-full flex items-center justify-center">
             <Bot className="w-8 h-8 text-blue-400" />
           </div>
-          <h2 className="text-xl font-semibold text-white mb-2">Forum Members Only</h2>
-          <p className="text-slate-400 mb-6">Upgrade to a Forum membership to chat with our AI research agent.</p>
+          <h2 className="text-xl font-semibold text-white mb-2">Sign in to chat</h2>
+          <p className="text-slate-400 mb-6">Sign in to your SPARK AI account to access the Research Agent.</p>
           <a href="/auth" className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-full hover:from-blue-500 hover:to-indigo-500 transition-all shadow-lg shadow-blue-500/25">
             Sign In
           </a>
